@@ -4,21 +4,48 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 public class Main {
-    static String result;
+    static InvoiceGenerator carInvoice = new InvoiceGenerator();
     public static void main(String[] args) {
-
-        System.out.println("Welcome to day 30 cab invoice generator program");
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter number of rides");
-        int rides = scanner.nextInt();
-        for(int i = 0; i < rides; i++) {
-            System.out.println("Enter the distance travelled");
-            double distance = scanner.nextDouble();
-            System.out.println("Enter the time travelled");
-            double timeInMin = scanner.nextDouble();
-            result = invoiceGenerator.calculateFare(distance, timeInMin, rides);
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            System.out.println("Select an option");
+            System.out.println("1.Add a ride details\n2.Search a user ride details\n3.Exit");
+            int option = sc.nextInt();
+            switch(option){
+                case 1:
+                    List<Integer> allRides = new ArrayList<>();
+                    List<Integer> userDetails = new ArrayList<>();
+                    System.out.println("Enter how many rides you took");
+                    int rides = sc.nextInt();
+                    System.out.println("Enter your user ID");
+                    int userID = sc.nextInt();
+                    for(int i=0; i<rides; i++){
+                        System.out.println("Enter total distance covered in one ride");
+                        int distance = sc.nextInt();
+                        System.out.println("Enter total no.of minutes taken in one ride");
+                        int min = sc.nextInt();
+                        allRides.add(carInvoice.calculateFare(distance,min));
+                    }
+                    System.out.println("Fares for rides are");
+                    for(int i = 0; i < allRides.size(); i++){
+                        System.out.println(allRides.get(i));
+                    }
+                    userDetails = carInvoice.enhancedInvoice(userID,allRides);
+                    System.out.println("Total no.of rides is " + userDetails.get(0)
+                            + "\nTotal fare is " + userDetails.get(1)
+                            + "\nAverage fare per ride is " + userDetails.get(2));
+                    System.out.println();
+                    break;
+                case 2:
+                    carInvoice.getUserDetails();
+                    break;
+                case 3:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Enter correct option\n");
+                    break;
+            }
         }
-        System.out.println(result);
     }
 }
