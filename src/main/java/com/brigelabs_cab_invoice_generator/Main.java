@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 public class Main {
-    static  double totalFare;
+    static String result;
     public static void main(String[] args) {
 
         System.out.println("Welcome to day 30 cab invoice generator program");
@@ -17,8 +17,8 @@ public class Main {
             double distance = scanner.nextDouble();
             System.out.println("Enter the time travelled");
             double timeInMin = scanner.nextDouble();
-            totalFare = invoiceGenerator.calculateFare(distance, timeInMin);
+            result = invoiceGenerator.calculateFare(distance, timeInMin, rides);
         }
-        System.out.println(totalFare);
+        System.out.println(result);
     }
 }

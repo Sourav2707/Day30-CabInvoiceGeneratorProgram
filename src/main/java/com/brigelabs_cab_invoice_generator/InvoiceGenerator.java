@@ -8,8 +8,10 @@ public class InvoiceGenerator {
     final double farePerKm = 10;
     final double minFare = 5;
     double totalFare = 0;
-    public double calculateFare(double distance, double timeInMin){
+    double averagefare = 0;
+    public String calculateFare(double distance, double timeInMin, int rides){
         totalFare = totalFare + (distance * farePerKm) + (timeInMin) + minFare;
-        return totalFare;
+        averagefare = totalFare / (double) rides;
+        return "Total number of rides: "+rides+" Total fare: "+totalFare+" Average Fare Per Ride: "+averagefare;
     }
 }
